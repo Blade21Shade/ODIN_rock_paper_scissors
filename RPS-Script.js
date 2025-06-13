@@ -27,13 +27,20 @@ function getPlayerChoice() {
 // Play functions
 
 /*
-The function for playing a single round
+Function for playing multiple games
 
-Get the choices from the computer and player
-Compare those against each other
-Whichever wins has their score incremented, or in the case of a tie the tie counter is incremented
-Then an output for who won that round and all score variables
+Asks the user how many rounds they want to play
+Then plays that many rounds
+    Prints the round number
+    Call the function for playing a round
 */
+function playGame() {
+    let numOfGames = parseInt(prompt("How many rounds would you like to play?"));
+    for (let i = 0; i < numOfGames; i++) {
+        console.log(`Round: ${i+1}`);
+        playRound();
+    }
+}
 
 function playRound() {
     let computerChoice = getComputerChoice();
@@ -74,17 +81,8 @@ function playRound() {
     }
 
     printWinnerInfo(winner, playerChoice, computerChoice);
+    printWinnerStatistics();
 }
-
-/*
-The function for printing the winner and statistics for wins
-
-Prints who won this round and the current statistics for wins
-    Who won
-    Player wins
-    Ties
-    Computer wins
-*/
 
 function printWinnerInfo(roundWinner, playerChoice, computerChoice) {
     // Print who won this round
@@ -98,7 +96,9 @@ function printWinnerInfo(roundWinner, playerChoice, computerChoice) {
         console.log(`Tie! Player chose ${playerChoice} and computer chose ${computerChoice}!`);
         tieScore++;
     }
+}
 
+function printWinnerStatistics() {
     // Print statistics
     console.log(`  Player wins: ${playerScore}`);
     console.log(`         Ties: ${tieScore}`);
@@ -106,9 +106,5 @@ function printWinnerInfo(roundWinner, playerChoice, computerChoice) {
     console.log("");
 }
 
-
-
-// Testing for 1 round (this will test multiple however)
-for (let i = 0; i < 12; i++) {
-    playRound();
-}
+// Running code
+playGame();
