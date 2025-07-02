@@ -13,11 +13,11 @@ function getComputerChoice() {
     let choice;
     // This isn't a perfect 1/3 split for each choice but it is close enough
     if (num > 0.66) {
-        choice = "rock";
+        choice = "Rock";
     } else if (num > 0.33) {
-        choice = "paper";
+        choice = "Paper";
     } else {
-        choice = "scissors";
+        choice = "Scissors";
     }
 
     return choice;
@@ -27,36 +27,35 @@ function getComputerChoice() {
 
 function playRound() {
     let computerChoice = getComputerChoice();
-
     let winner = "";
 
     switch(playerChoice) {
-        case "rock":
-            if (computerChoice === "rock") {
+        case "Rock":
+            if (computerChoice === "Rock") {
                 winner = "tie";
-            } else if (computerChoice === "paper") {
+            } else if (computerChoice === "Paper") {
                 winner = "computer";
-            } else { // scissors
+            } else { // Scissors
                 winner = "player";
             }
             break;
         
-        case "paper":
-            if (computerChoice === "rock") {
+        case "Paper":
+            if (computerChoice === "Rock") {
                 winner = "player";
-            } else if (computerChoice === "paper") {
+            } else if (computerChoice === "Paper") {
                 winner = "tie";
-            } else { // scissors
+            } else { // Scissors
                 winner = "computer";
             }
             break;
 
-        case "scissors":
-            if (computerChoice === "rock") {
+        case "Scissors":
+            if (computerChoice === "Rock") {
                 winner = "computer";
-            } else if (computerChoice === "paper") {
+            } else if (computerChoice === "Paper") {
                 winner = "player";
-            } else { // scissors
+            } else { // Scissors
                 winner = "tie";
             }
             break;
@@ -68,6 +67,7 @@ function playRound() {
 
 function displayRoundInfo(roundWinner, computerChoice) {
     // Print who won this round
+    
     if (roundWinner === "player") {
         roundStats.innerText = `Player wins! ${playerChoice} beats ${computerChoice}!`;
         playerScore++;
@@ -95,17 +95,17 @@ const paperbtn = document.querySelector("#paperbtn");
 const scissorsbtn = document.querySelector("#scissorsbtn");
 
 rockbtn.addEventListener("click", () => {
-    playerChoice = "rock";
+    playerChoice = "Rock";
     playRound();
 });
 
 paperbtn.addEventListener("click", () => {
-    playerChoice = "paper";
+    playerChoice = "Paper";
     playRound();
 });
 
 scissorsbtn.addEventListener("click", () => {
-    playerChoice = "scissors";
+    playerChoice = "Scissors";
     playRound();
 });
 
