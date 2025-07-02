@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="RPS-Script.js"></script>
+    <script src="RPS-Script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1 class="page-title">Rock, Paper, Scissors!</h1>
 
+    <div class="button-container">
+        <button id="rockbtn">Rock</button>
+        <button id="paperbtn">Paper</button>
+        <button id="scissorsbtn">Scissors</button>
+    </div>
+
+    <div class="statistics-container">
+        <p id="round-stats">Each round will display here</p>
+        <p id="total-stats">Winner statistics for all rounds will display here</p>
+    </div>
 </body>
 </html>

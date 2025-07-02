@@ -3,6 +3,9 @@ let playerScore = 0;
 let tieScore = 0;
 let computerScore = 0;
 
+// Player choice (moved so it can be set by buttons)
+let playerChoice = "";
+
 // getChoice functions
 function getComputerChoice() {
     let num = Math.random();
@@ -10,101 +13,102 @@ function getComputerChoice() {
     let choice;
     // This isn't a perfect 1/3 split for each choice but it is close enough
     if (num > 0.66) {
-        choice = "rock";
+        choice = "Rock";
     } else if (num > 0.33) {
-        choice = "paper";
+        choice = "Paper";
     } else {
-        choice = "scissors";
+        choice = "Scissors";
     }
 
     return choice;
 }
 
-function getPlayerChoice() {
-    return prompt("Type which of the three you wish to play: ").toLowerCase();
-}
-
 // Play functions
-
-/*
-Function for playing multiple games
-
-Asks the user how many rounds they want to play
-Then plays that many rounds
-    Prints the round number
-    Call the function for playing a round
-*/
-function playGame() {
-    let numOfGames = parseInt(prompt("How many rounds would you like to play?"));
-    for (let i = 0; i < numOfGames; i++) {
-        console.log(`Round: ${i+1}`);
-        playRound();
-    }
-}
 
 function playRound() {
     let computerChoice = getComputerChoice();
-    let playerChoice = getPlayerChoice();
-
     let winner = "";
 
     switch(playerChoice) {
-        case "rock":
-            if (computerChoice === "rock") {
+        case "Rock":
+            if (computerChoice === "Rock") {
                 winner = "tie";
-            } else if (computerChoice === "paper") {
+            } else if (computerChoice === "Paper") {
                 winner = "computer";
-            } else { // scissors
+            } else { // Scissors
                 winner = "player";
             }
             break;
         
-        case "paper":
-            if (computerChoice === "rock") {
+        case "Paper":
+            if (computerChoice === "Rock") {
                 winner = "player";
-            } else if (computerChoice === "paper") {
+            } else if (computerChoice === "Paper") {
                 winner = "tie";
-            } else { // scissors
+            } else { // Scissors
                 winner = "computer";
             }
             break;
 
-        case "scissors":
-            if (computerChoice === "rock") {
+        case "Scissors":
+            if (computerChoice === "Rock") {
                 winner = "computer";
-            } else if (computerChoice === "paper") {
+            } else if (computerChoice === "Paper") {
                 winner = "player";
-            } else { // scissors
+            } else { // Scissors
                 winner = "tie";
             }
             break;
     }
 
-    printWinnerInfo(winner, playerChoice, computerChoice);
-    printWinnerStatistics();
+    displayRoundInfo(winner, computerChoice);
+    displayTotalStatistics();
 }
 
-function printWinnerInfo(roundWinner, playerChoice, computerChoice) {
+function displayRoundInfo(roundWinner, computerChoice) {
     // Print who won this round
+    
     if (roundWinner === "player") {
-        console.log(`Player wins! ${playerChoice} beats ${computerChoice}!`);
+        roundStats.innerText = `Player wins! ${playerChoice} beats ${computerChoice}!`;
         playerScore++;
     } else if (roundWinner === "computer") {
-        console.log(`Computer wins! ${computerChoice} beats ${playerChoice}!`);
+        roundStats.innerText = `Computer wins! ${computerChoice} beats ${playerChoice}!`;
         computerScore++;
     } else { // tie
-        console.log(`Tie! Player chose ${playerChoice} and computer chose ${computerChoice}!`);
+        roundStats.innerText = `Tie! Player chose ${playerChoice} and computer chose ${computerChoice}!`;
         tieScore++;
     }
 }
 
-function printWinnerStatistics() {
+function displayTotalStatistics() {
     // Print statistics
-    console.log(`  Player wins: ${playerScore}`);
-    console.log(`         Ties: ${tieScore}`);
-    console.log(`Computer Wins: ${computerScore}`);
-    console.log("");
+    totalStats.innerText = 
+    `Player wins: ${playerScore}
+    Ties: ${tieScore}
+    Computer Wins: ${computerScore}`;
 }
 
-// Running code
-playGame();
+// Event handling the buttons
+// const buttons = document.querySelectorAll(".button-container button"); // Doing all at once, plan to work on this later
+const rockbtn = document.querySelector("#rockbtn");
+const paperbtn = document.querySelector("#paperbtn");
+const scissorsbtn = document.querySelector("#scissorsbtn");
+
+rockbtn.addEventListener("click", () => {
+    playerChoice = "Rock";
+    playRound();
+});
+
+paperbtn.addEventListener("click", () => {
+    playerChoice = "Paper";
+    playRound();
+});
+
+scissorsbtn.addEventListener("click", () => {
+    playerChoice = "Scissors";
+    playRound();
+});
+
+// Getting document information for the statistics variables that need to be updated per round
+const roundStats = document.querySelector("#round-stats");
+const totalStats = document.querySelector("#total-stats");
