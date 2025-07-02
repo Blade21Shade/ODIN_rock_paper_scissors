@@ -3,6 +3,9 @@ let playerScore = 0;
 let tieScore = 0;
 let computerScore = 0;
 
+// Player choice (moved so it can be set by buttons)
+let playerChoice = "";
+
 // getChoice functions
 function getComputerChoice() {
     let num = Math.random();
@@ -20,31 +23,10 @@ function getComputerChoice() {
     return choice;
 }
 
-function getPlayerChoice() {
-    // return prompt("Type which of the three you wish to play: ").toLowerCase();
-}
-
 // Play functions
-
-/*
-Function for playing multiple games
-
-Asks the user how many rounds they want to play
-Then plays that many rounds
-    Prints the round number
-    Call the function for playing a round
-*/
-function playGame() {
-    // let numOfGames = parseInt(prompt("How many rounds would you like to play?"));
-    for (let i = 0; i < /*numOfGames*/ 2; i++) {
-        console.log(`Round: ${i+1}`);
-        playRound();
-    }
-}
 
 function playRound() {
     let computerChoice = getComputerChoice();
-    let playerChoice = getPlayerChoice();
 
     let winner = "";
 
@@ -80,11 +62,11 @@ function playRound() {
             break;
     }
 
-    printWinnerInfo(winner, playerChoice, computerChoice);
+    printWinnerInfo(winner, computerChoice);
     printWinnerStatistics();
 }
 
-function printWinnerInfo(roundWinner, playerChoice, computerChoice) {
+function printWinnerInfo(roundWinner, computerChoice) {
     // Print who won this round
     if (roundWinner === "player") {
         console.log(`Player wins! ${playerChoice} beats ${computerChoice}!`);
@@ -106,5 +88,23 @@ function printWinnerStatistics() {
     console.log("");
 }
 
-// Running code
-playGame();
+// Event handling the buttons
+// const buttons = document.querySelectorAll(".button-container button"); // Doing all at once, plan to work on this later
+const rockbtn = document.querySelector("#rockbtn");
+const paperbtn = document.querySelector("#paperbtn");
+const scissorsbtn = document.querySelector("#scissorsbtn");
+
+rockbtn.addEventListener("click", () => {
+    playerChoice = "rock";
+    playRound();
+});
+
+paperbtn.addEventListener("click", () => {
+    playerChoice = "paper";
+    playRound();
+});
+
+scissorsbtn.addEventListener("click", () => {
+    playerChoice = "scissors";
+    playRound();
+});
