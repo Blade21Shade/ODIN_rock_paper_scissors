@@ -21,7 +21,7 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    return prompt("Type which of the three you wish to play: ").toLowerCase();
+    // return prompt("Type which of the three you wish to play: ").toLowerCase();
 }
 
 // Play functions
@@ -35,8 +35,8 @@ Then plays that many rounds
     Call the function for playing a round
 */
 function playGame() {
-    let numOfGames = parseInt(prompt("How many rounds would you like to play?"));
-    for (let i = 0; i < numOfGames; i++) {
+    // let numOfGames = parseInt(prompt("How many rounds would you like to play?"));
+    for (let i = 0; i < /*numOfGames*/ 2; i++) {
         console.log(`Round: ${i+1}`);
         playRound();
     }
