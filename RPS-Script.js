@@ -62,30 +62,30 @@ function playRound() {
             break;
     }
 
-    printWinnerInfo(winner, computerChoice);
-    printWinnerStatistics();
+    displayRoundInfo(winner, computerChoice);
+    displayTotalStatistics();
 }
 
-function printWinnerInfo(roundWinner, computerChoice) {
+function displayRoundInfo(roundWinner, computerChoice) {
     // Print who won this round
     if (roundWinner === "player") {
-        console.log(`Player wins! ${playerChoice} beats ${computerChoice}!`);
+        roundStats.innerText = `Player wins! ${playerChoice} beats ${computerChoice}!`;
         playerScore++;
     } else if (roundWinner === "computer") {
-        console.log(`Computer wins! ${computerChoice} beats ${playerChoice}!`);
+        roundStats.innerText = `Computer wins! ${computerChoice} beats ${playerChoice}!`;
         computerScore++;
     } else { // tie
-        console.log(`Tie! Player chose ${playerChoice} and computer chose ${computerChoice}!`);
+        roundStats.innerText = `Tie! Player chose ${playerChoice} and computer chose ${computerChoice}!`;
         tieScore++;
     }
 }
 
-function printWinnerStatistics() {
+function displayTotalStatistics() {
     // Print statistics
-    console.log(`  Player wins: ${playerScore}`);
-    console.log(`         Ties: ${tieScore}`);
-    console.log(`Computer Wins: ${computerScore}`);
-    console.log("");
+    totalStats.innerText = 
+    `Player wins: ${playerScore}
+    Ties: ${tieScore}
+    Computer Wins: ${computerScore}`;
 }
 
 // Event handling the buttons
@@ -108,3 +108,7 @@ scissorsbtn.addEventListener("click", () => {
     playerChoice = "scissors";
     playRound();
 });
+
+// Getting document information for the statistics variables that need to be updated per round
+const roundStats = document.querySelector("#round-stats");
+const totalStats = document.querySelector("#total-stats");
